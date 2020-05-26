@@ -59,7 +59,9 @@ void tarefa_1(void)
 	for(;;)
 	{
 		a++;
-                TarefaContinua(1);              // Verifica se outra tarefa de maior prioridade esta PRONTA
+                
+                if(TCB[2].estado == PRONTA)
+                  TarefaContinua(1);              // Verifica se outra tarefa de maior prioridade esta PRONTA
 	
 	}
 }
