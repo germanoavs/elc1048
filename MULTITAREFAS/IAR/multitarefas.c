@@ -57,7 +57,7 @@ uint8_t escalonador(void)
 
 /*********************************************/
 void CriaTarefa(tarefa_t p, const char * nome,
-stackptr_t pilha, uint16_t tamanho, prioridade_t prioridade)
+stackptr_t pilha, uint16_t tamanho, prioridade_t prioridade, estado_tarefa_t estd)
 {
 	
 	if(tamanho < TAM_MINIMO_PILHA)
@@ -73,7 +73,7 @@ stackptr_t pilha, uint16_t tamanho, prioridade_t prioridade)
 	/* guardar os dados no bloco de controle da tarefa (TCB) */
 	TCB[numero_tarefas].nome = nome;
 	TCB[numero_tarefas].stack_pointer = (stackptr_t)(pilha);
-	TCB[numero_tarefas].estado = PRONTA;
+	TCB[numero_tarefas].estado = estd;
 	TCB[numero_tarefas].prioridade = prioridade;
 	TCB[numero_tarefas].tempo_espera = 0;
 	  
@@ -97,7 +97,7 @@ void TarefaContinua(uint8_t id_tarefa)
 {
 	REG_ATOMICA_INICIO();
 	TCB[id_tarefa].estado = PRONTA;			/* tarefa é colocada na fila de prontas */
-	TrocaContexto(); 		   				/* tarefa atual solicita troca de contexto */
+	//TrocaContexto(); 		   				/* tarefa atual solicita troca de contexto */
 	REG_ATOMICA_FIM();
 }
 
